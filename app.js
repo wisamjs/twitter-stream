@@ -27,7 +27,7 @@ var twitter = new twit({
 });
 
 //Start server
-app.listen( app.get( 'port' ),function() {
+server.listen( app.get( 'port' ),function() {
 	console.log( 'Listening on port: ' + app.get( 'port' ));
 });
 
