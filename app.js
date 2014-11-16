@@ -7,11 +7,10 @@ var express     = require('express'),
   twit          = require('twit');
 
 var app = express();
-var server = require('http').createServer(app);
+var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 // Express setup
-app = express();
 app.set( 'port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({
   extended: true
@@ -32,22 +31,10 @@ app.listen( app.get( 'port' ),function() {
 	console.log( 'Listening on port: ' + app.get( 'port' ));
 });
 
-// listen to tweets with a certain hash
-app.get('/tweets/:hash', function (req, res) {
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/app/index.html');
+});
 
-  var hash = req.params.hash;
-  var stream = twitter.stream('statuses/filter', { track: '#'+hash, language: 'en' })
-
-  stream.on('tweet', function (tweet) {
-    console.log(tweet.text)
-  });
-
-  io.on('connection', function (socket) {
-    socket.on('new tweet', function (data) {
-      socket.broadcast.emit('new tweet', {
-        message: data
-      });
-    });
-  });
-
+io.on('connection', function (socket) {
+  console.log('a user connected');
 });
