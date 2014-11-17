@@ -1,15 +1,17 @@
 'use strict';
 
 angular.module('TwStream')
-	.factory('Stream', function(){
+	.factory('Stream', function($q){
 		var service = {};
 
 		service.connect = function(hashtag){
+			var defer = $q.defer();
+
 			var socket = io('http://localhost');
 			socket.emit('set hashtag', hashtag);
-			socket.on('new tweet', function(tweet){
-				console.log(tweet);
-			});
+			defer.resolve(socket);
+
+			return defer.promise;
 		};
 
 		return service;
