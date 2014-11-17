@@ -14,11 +14,9 @@
 	<script>
 		var socket = io();
 
-  		/*socket.on('new tweet', function (data) {
-    		console.log(data);
-    		socket.emit('my other event', { my: 'data' });
-  		});
-*/
+  	socket.on('new tweet', function (tweet) {
+  		console.log('tweet on client: '+tweet);
+		});
 	</script>
 </body>
 </html>
