@@ -4,23 +4,19 @@
   <title>Twitter Stream</title>
 </head>
 <body ng-app="TwStream" ng-controller="MainCtrl">
-	<h1>{{msg}}</h1>
+	<h1>Twitter Stream</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis officia non porro, eos tenetur harum unde perspiciatis vero voluptates blanditiis nostrum quasi deleniti cumque aperiam dolorum maxime illum tempora, totam!</p>
+
+	<p>Enter a hashtag:</p>
+	<form>
+		<input type="text" ng-model="hashtag">
+		<button ng-click="stream.connect(hashtag)">Submit</button>
+	</form>
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.0/angular.min.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/Stream.js"></script>
 	<script src="js/MainCtrl.js"></script>
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-	<script>
-		var socket = io();
-
-		
-
-  		/*socket.on('new tweet', function (data) {
-    		console.log(data);
-    		socket.emit('my other event', { my: 'data' });
-  		});
-*/
-	</script>
 </body>
 </html>

@@ -2,7 +2,11 @@
 
 angular.module('TwStream')
 	.factory('Stream', function(){
-		service = {};
+		var service = {};
+
+		service.connect = function(hashtag){
+			var socket = io('http://localhost',{'hashtag':hashtag});
+		};
 
 		return service;
 	});
