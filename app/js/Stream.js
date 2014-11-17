@@ -5,7 +5,11 @@ angular.module('TwStream')
 		var service = {};
 
 		service.connect = function(hashtag){
-			var socket = io('http://localhost',{'hashtag':hashtag});
+			var socket = io('http://localhost');
+			socket.emit('set hashtag', hashtag);
+			socket.on('new tweet', function(tweet){
+				console.log(tweet);
+			});
 		};
 
 		return service;
