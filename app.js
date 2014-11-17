@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
 
   socket.on('set hashtag', function (hashtag) {
-    var stream = twitter.stream('statuses/filter', { track: '#'+hash, language: 'en' });
+    var stream = twitter.stream('statuses/filter', { track: '#'+hashtag, language: 'en' });
 
     stream.on('tweet', function (tweet) {
       io.emit('new tweet', tweet.text);
