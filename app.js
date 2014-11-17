@@ -36,23 +36,12 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-  console.log('a user has connected');
 
-  socket.on('new tweet', function (tweet) {
-    io.emit('new tweet', tweet);
+  socket.on('set hashtag', function (hashtag) {
+    var stream = twitter.stream('statuses/filter', { track: '#'+hash, language: 'en' });
+
+    stream.on('tweet', function (tweet) {
+      io.emit('new tweet', tweet.text);
+    });
   });
-});
-
-app.get('/tweets/:hash', function (req, res) {
-  var hash = req.params.hash;
-
-  // a user has connected, lets set up the stream
-  var stream = twitter.stream('statuses/filter', { track: '#'+hash, language: 'en' });
-
-  stream.on('tweet', function (tweet) {
-    console.log(tweet.text);
-
-    io.emit('new tweet', tweet.text);
-  });
-
 });
